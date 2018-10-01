@@ -1,0 +1,2 @@
+module CriptocurrenciesHelper
+end

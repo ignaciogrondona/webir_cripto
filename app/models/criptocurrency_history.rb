@@ -1,0 +1,2 @@
+class CriptocurrencyHistory < ApplicationRecord
+end
