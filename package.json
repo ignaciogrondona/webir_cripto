@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
-    "postcss-cli": "^6.0.0"
+    "postcss-cli": "^6.0.0",
+    "tailwindcss-spinner": "^0.2.0"
   },
   "devDependencies": {
     "postcss-loader": "^3.0.0",
