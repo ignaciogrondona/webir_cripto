@@ -1,0 +1,2 @@
+class EthereumPrice < CryptocurrencyPrice
+end

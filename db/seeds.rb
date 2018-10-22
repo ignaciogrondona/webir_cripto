@@ -5,4 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+unless AdminUser.find_by(email: 'admin@example.com')
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
+Exchange.where(name: 'Bitstamp', api_url: 'https://www.bitstamp.net/api/ticker/').first_or_create
+Exchange.where(name: 'Bitfinex', api_url: 'https://api.bitfinex.com/v1/').first_or_create
+Exchange.where(name: 'Coinbase', api_url: 'https://api.coinbase.com/v2/').first_or_create

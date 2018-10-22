@@ -1,0 +1,2 @@
+class BitcoinPrice < CryptocurrencyPrice
+end

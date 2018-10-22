@@ -1,0 +1,2 @@
+class LitecoinPrice < CryptocurrencyPrice
+end

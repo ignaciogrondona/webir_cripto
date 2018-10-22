@@ -36,8 +36,6 @@ function refreshPrices() {
   });
 }
 
-
-
 $( document ).ready(function() {
   refreshPrices();
 
