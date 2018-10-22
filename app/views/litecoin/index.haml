@@ -7,12 +7,12 @@
             %svg.fill-current.text-white.h-8.w-8{:viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
               %path{:d => "M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"}
           .md:w-auto.text-center.text-white.text-2xl.font-medium{:class => "w-1/2"}
-            webirCrypto - Dashboard
+            webirCrypto - Litecoin
     .hidden.bg-blue-dark.md:block.md:bg-white.md:border-b
       .container.mx-auto.px-4
         .md:flex
           .flex.-mb-px.mr-8
-            = link_to criptocurrency_histories_path, id: 'dashboard-link', class: 'no-underline text-white md:text-blue-dark flex items-center py-4 border-b border-blue-dark' do
+            = link_to criptocurrency_histories_path, class: 'no-underline text-white opacity-50 md:text-grey-dark md:opacity-100 flex items-center py-4 border-b border-transparent hover:opacity-100 md:hover:border-grey-dark' do
               = inline_svg('dashboard.svg', class: 'w-6 h-6 mr-1')
               Dashboard
           .flex.-mb-px.mr-8
@@ -20,7 +20,7 @@
               = inline_svg('bitcoin.svg', class: 'w-6 h-6 mr-1')
               Bitcoin
           .flex.-mb-px.mr-8
-            = link_to litecoin_index_path, class: 'no-underline text-white opacity-50 md:text-grey-dark md:opacity-100 flex items-center py-4 border-b border-transparent hover:opacity-100 md:hover:border-grey-dark' do
+            = link_to litecoin_index_path, class: 'no-underline text-white md:text-blue-dark flex items-center py-4 border-b border-blue-dark' do
               = inline_svg('litecoin.svg', class: 'w-6 h-6 mr-1')
               Litecoin
           .flex.-mb-px.mr-8
@@ -33,22 +33,22 @@
         .text-center.py-8{:class => "w-1/3"}
           .border-r
             .text-grey-darker.mb-2
-              %span#bitstamp-dashboard-price.text-5xl
+              %span#bitstamp-litecoin-price.text-5xl
             .text-sm.uppercase.text-grey.tracking-wide
               Bitstamp
         .text-center.py-8{:class => "w-1/3"}
           .border-r
             .text-grey-darker.mb-2
-              %span#bitfinex-dashboard-price.text-5xl
+              %span#bitfinex-litecoin-price.text-5xl
             .text-sm.uppercase.text-grey.tracking-wide
               Bitfinex
         .text-center.py-8{:class => "w-1/3"}
           %div
             .text-grey-darker.mb-2
-              %span#coinbase-dashboard-price.text-5xl
+              %span#coinbase-litecoin-price.text-5xl
             .text-sm.uppercase.text-grey.tracking-wide
               Coinbase
-      #refresh-dashboard-prices.text-right.pointer.text-sm.px-4gi.cursor-pointer.mr-2
+      #refresh-litecoin-prices.text-right.pointer.text-sm.px-4gi.cursor-pointer.mr-2
         %svg.h-4.w-4.fill-current{:viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
           %path{:d => "M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z", "fill-rule" => "nonzero"}
         Refresh

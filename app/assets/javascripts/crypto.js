@@ -1,49 +1,65 @@
-function refreshPrices() {
+function refreshPrices(coin) {
+  var bitstampUrl = 'https://www.bitstamp.net/api/v2/ticker/';
+  var bitfinexUrl = 'https://api.bitfinex.com/v1/pubticker/';
+  var coinbaseUrl = 'https://api.coinbase.com/v2/prices/';
+
+  if (coin == 'ethereum') {
+    bitstampUrl += 'ethusd';
+    bitfinexUrl += 'ethusd';
+    coinbaseUrl += 'eth-usd/spot';
+  } else if (coin == 'litecoin') {
+    bitstampUrl += 'ltcusd';
+    bitfinexUrl += 'ltcusd';
+    coinbaseUrl += 'ltc-usd/spot';
+  } else {
+    bitstampUrl += 'btcusd';
+    bitfinexUrl += 'btcusd';
+    coinbaseUrl += 'btc-usd/spot';
+  }
+
   $.ajax({
-    url: 'https://www.bitstamp.net/api/ticker/',
+    url: bitstampUrl,
     type: 'GET',
-    timeout: 80000,
     dataType: 'json',
     success: function(data) {
-      $('#bitstamp-price').html(data.last);
+      $('#bitstamp-' + coin + '-price').html(data.last);
     },
     error: function() {
     }
   });
 
   $.ajax({
-    url: 'https://api.bitfinex.com/v1/pubticker/btcusd',
+    url: bitfinexUrl,
     type: 'GET',
-    timeout: 80000,
     dataType: 'json',
     success: function(data) {
-      $('#bitfinex-price').html(data.last_price);
+      $('#bitfinex-' + coin + '-price').html(data.last_price);
     },
     error: function() {
     }
   });
 
   $.ajax({
-    url: 'https://api.coinbase.com/v2/prices/spot?currency=USD',
+    url: coinbaseUrl,
     type: 'GET',
-    timeout: 80000,
     dataType: 'json',
     success: function(data) {
-      $('#coinbase-price').html(data.data.amount);
+      $('#coinbase-'+ coin +'-price').html(data.data.amount);
     },
     error: function() {
     }
   });
 }
 
-$( document ).ready(function() {
-  refreshPrices();
+$().ready(function() {
+  refreshPrices('dashboard');
+  refreshPrices('litecoin');
+  refreshPrices('bitcoin');
+  refreshPrices('ethereum');
 
-  $('#refresh-prices').on('click', function() {
-    $('#refresh-button').hide();
-    $('#refresh-spinner').show();
-    refreshPrices();
-    $('#refresh-spinner').hide();
-    $('#refresh-button').show();
+  $('#refresh-prices, #refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
+    buttonId = $(this).attr('id');
+    coin = buttonId.match(new RegExp('refresh-' + "(.*)" + '-prices'))[1];
+    refreshPrices(coin);
   });
 });

@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   resources :criptocurrency_histories
   resources :criptocurrencies
+  resources :bitcoin, :litecoin, :ethereum
   resources :users
 end
