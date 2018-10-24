@@ -51,7 +51,7 @@ function refreshPrices(coin) {
   });
 }
 
-$().ready(function() {
+$(document).on('turbolinks:load', function() {
   refreshPrices('dashboard');
   refreshPrices('litecoin');
   refreshPrices('bitcoin');
