@@ -1,20 +1,20 @@
 function refreshPrices(coin) {
   var bitstampUrl = 'https://www.bitstamp.net/api/v2/ticker/';
   var bitfinexUrl = 'https://api.bitfinex.com/v1/pubticker/';
-  var coinbaseUrl = 'https://api.coinbase.com/v2/prices/';
+  var coinbaseUrl = 'https://api.pro.coinbase.com/products/';
 
   if (coin == 'ethereum') {
     bitstampUrl += 'ethusd';
     bitfinexUrl += 'ethusd';
-    coinbaseUrl += 'eth-usd/spot';
+    coinbaseUrl += 'eth-usd/ticker/';
   } else if (coin == 'litecoin') {
     bitstampUrl += 'ltcusd';
     bitfinexUrl += 'ltcusd';
-    coinbaseUrl += 'ltc-usd/spot';
+    coinbaseUrl += 'ltc-usd/ticker/';
   } else {
     bitstampUrl += 'btcusd';
     bitfinexUrl += 'btcusd';
-    coinbaseUrl += 'btc-usd/spot';
+    coinbaseUrl += 'btc-usd/ticker/';
   }
 
   $.ajax({
@@ -23,10 +23,13 @@ function refreshPrices(coin) {
     dataType: 'json',
     success: function(data) {
       createCoin(coin, 'bitstamp', data.last, new Date($.now()));
+      $('#bitstamp-' + coin + '-price-bid').html(data.bid);
+      $('#bitstamp-' + coin + '-price-ask').html(data.ask);
     },
     error: function() {
     }
   });
+
 
   $.ajax({
     url: bitfinexUrl,
@@ -34,6 +37,8 @@ function refreshPrices(coin) {
     dataType: 'json',
     success: function(data) {
       createCoin(coin, 'coinbase', data.last_price, new Date($.now()));
+      $('#bitfinex-' + coin + '-price-bid').html(data.bid);
+      $('#bitfinex-' + coin + '-price-ask').html(data.ask);
     },
     error: function() {
     }
@@ -45,6 +50,8 @@ function refreshPrices(coin) {
     dataType: 'json',
     success: function(data) {
       createCoin(coin, 'coinbase', data.data.amount, new Date($.now()));
+      $('#coinbase-'+ coin +'-price-bid').html(data.bid);
+      $('#coinbase-'+ coin +'-price-ask').html(data.ask);
     },
     error: function() {
     }
@@ -108,4 +115,5 @@ $(document).on('turbolinks:load', function() {
     coin = buttonId.match(new RegExp('refresh-' + "(.*)" + '-prices'))[1];
     refreshPrices(coin);
   });
+
 });
