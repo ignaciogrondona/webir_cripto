@@ -22,7 +22,7 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      $('#bitstamp-' + coin + '-price').html(data.last);
+      createCoin(coin, 'bitstamp', data.last, new Date($.now()));
     },
     error: function() {
     }
@@ -33,7 +33,7 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      $('#bitfinex-' + coin + '-price').html(data.last_price);
+      createCoin(coin, 'coinbase', data.last_price, new Date($.now()));
     },
     error: function() {
     }
@@ -44,18 +44,64 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      $('#coinbase-'+ coin +'-price').html(data.data.amount);
+      createCoin(coin, 'coinbase', data.data.amount, new Date($.now()));
     },
     error: function() {
     }
   });
 }
 
-$(document).on('turbolinks:load', function() {
+function createCoin(coin, exchange, value, datetime) {
+  var exchange_id;
+  if (exchange == 'bitstamp') {
+    exchange_id = 1;
+  } else if (exchange == 'bitfinex') {
+    exchange_id = 2;
+  } else if (exchange == 'coinbase') {
+    exchange_id = 3;
+  }
+
+  if (coin == 'dashboard') {
+    path = 'bitcoin'
+  } else {
+    path = coin
+  }
+
+  var url = 'http://localhost:3000/' + path;
+  var data = {
+    currency_price: {
+      exchange_id: exchange_id,
+      value: value,
+      datetime: datetime
+    }
+  }
+
+  $.ajax({
+    url: url,
+    type: 'POST',
+    dataType: 'json',
+    data: data,
+    success: function(response) {
+      $('#' + exchange + '-' + coin + '-price').html(response.value);
+    },
+    error: function() {
+    }
+  });
+}
+
+function refreshAllPrices() {
   refreshPrices('dashboard');
   refreshPrices('litecoin');
   refreshPrices('bitcoin');
   refreshPrices('ethereum');
+}
+
+$(document).on('turbolinks:load', function() {
+  refreshAllPrices();
+  setInterval(function() {
+    refreshAllPrices();
+  }, 1000 * 60);
+
 
   $('#refresh-prices, #refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
     buttonId = $(this).attr('id');
