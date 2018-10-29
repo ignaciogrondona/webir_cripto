@@ -52,6 +52,7 @@ function refreshPrices(coin) {
   });
 }
 
+<<<<<<< HEAD
 function createCoin(coin, exchange, bid, ask, datetime) {
   var exchange_id;
   if (exchange == 'bitstamp') {
@@ -93,7 +94,6 @@ function createCoin(coin, exchange, bid, ask, datetime) {
 }
 
 function refreshAllPrices() {
-  refreshPrices('dashboard');
   refreshPrices('litecoin');
   refreshPrices('bitcoin');
   refreshPrices('ethereum');
@@ -105,7 +105,7 @@ $(document).on('turbolinks:load', function() {
     refreshAllPrices();
   }, 1000 * 60 * 5);
 
-  $('#refresh-prices, #refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
+  $('#refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
     buttonId = $(this).attr('id');
     coin = buttonId.match(new RegExp('refresh-' + "(.*)" + '-prices'))[1];
     refreshPrices(coin);
