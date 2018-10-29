@@ -53,7 +53,7 @@
           %path{:d => "M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z", "fill-rule" => "nonzero"}
         Refresh
 
-    .flex.flex-wrap.-mx-4
+    .flex.flex-wrap.-mx-4.mb-6
       .w-full.mb-6.lg:mb-0.px-4.flex.flex-col{:class => "lg:w-1/2"}
         .flex-grow.flex.flex-col.bg-white.border-t.border-b.sm:rounded.sm:border.shadow.overflow-hidden
           .border-b
@@ -120,6 +120,40 @@
               %h3.text-blue-dark.py-4.font-normal.text-lg Recent Activity
           %div
             =line_chart @prices
+
+    .bg-white.rounded.shadow.p-6
+      .flex
+        .p-3.pl-0{ class: 'w-1/3' }
+          .p-4.rounded.shadow.bg-grey-lightest.h-full
+            .text-xl.mb-2.uppercase.font-medium
+              Bitstamp
+            %p
+              Bitstamp es un Bitcoin Exchange con sede en Luxemburgo. Permite el comercio entre
+              dolares estadounidenses y distintas criptomoneda. Permite depósitos y retiros en efectivo de USD,
+              EUR, bitcoin, litecoin, ethereum, ripple o bitcoin.
+              Bitstamp ofrece una API para permitir a los clientes usar software personalizado para
+              acceder y controlar sus cuentas.
+        .p-3{ class: 'w-1/3' }
+          .p-4.rounded.shadow.bg-grey-lightest.h-full
+            .text-xl.mb-2.uppercase.font-medium
+              Bitfinex
+            %p
+              Bitfinex es uno de los exchanges de criptomonedas más grandes del panorama financiero.
+              Actualmente, esta casa de intercambios es la mayor en cuanto a volumen de transacciones
+              de la criptodivisa más famosa, el Bitcoin.
+              Como ya hemos dicho al principio, Bitfinex es uno de los exchanges que cuenta con mayor volumen
+              de transacciones para el par BTC/USD y esto es debido al buen trabajo que su equipo técnico,
+              las bajas comisiones que se cobran, la amplia gama de monedas ofrecidas, etc.
+        .p-3.pr-0{ class: 'w-1/3' }
+          .p-4.rounded.shadow.bg-grey-lightest.h-full
+            .text-xl.mb-2.uppercase.font-medium
+              Coinbase
+            %p
+              Coinbase es una plataforma y monedero digital con sede en San Francisco, California.
+              Fundada en 2012 por Brian Armstrong y Fred Ehrsam. En la actualidad cuenta con más de 10
+              millones de usuarios y más de 217 millones de dólares recaudados de los más importantes
+              inversores del mundo.
+              Coinbase permite operar con criptomonedas de forma sencilla y segura.
 
   .bg-white.border-t
     .container.mx-auto.px-4.py-6
