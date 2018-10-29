@@ -4,7 +4,7 @@ class LitecoinController < ApplicationController
     Exchange.all.each do |exchange|
       line = { name: exchange.name, data: {} }
       exchange.litecoin_prices.last(20).each do |coin|
-        line[:data][coin.datetime.change(sec:0)] = coin.value
+        line[:data][coin.datetime.change(sec:0)] = coin.bid_price
       end
       @prices.push(line)
     end
