@@ -8,6 +8,8 @@ class EthereumController < ApplicationController
       end
       @prices.push(line)
     end
+    @min = (@prices.map {|price| price[:data].values }.min.min * 0.998).truncate
+    @max = (@prices.map {|price| price[:data].values }.max.max * 1.002).ceil
     @prices
   end
 

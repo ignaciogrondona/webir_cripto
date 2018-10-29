@@ -137,7 +137,7 @@
             .flex.justify-between.px-6.-mb-px
               %h3.text-blue-dark.py-4.font-normal.text-lg Recent Activity
           %div
-            =line_chart @prices
+            =line_chart @prices, min: @min, max: @max
 
   .bg-white.border-t
     .container.mx-auto.px-4.py-6
