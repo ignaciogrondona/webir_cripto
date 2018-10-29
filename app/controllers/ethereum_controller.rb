@@ -23,6 +23,6 @@ class EthereumController < ApplicationController
   private
 
   def ethereum_params
-    params.require(:currency_price).permit(:exchange_id, :value, :datetime)
+    params.require(:currency_price).permit(:exchange_id, :ask_price, :bid_price, :datetime)
   end
 end

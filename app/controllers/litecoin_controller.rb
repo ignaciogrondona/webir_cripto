@@ -2,7 +2,7 @@ class LitecoinController < ApplicationController
   def index
     @prices = []
     Exchange.all.each do |exchange|
-      line = { name: exchange.name, data: {} } 
+      line = { name: exchange.name, data: {} }
       exchange.litecoin_prices.last(20).each do |coin|
         line[:data][coin.datetime.change(sec:0)] = coin.value
       end
@@ -23,6 +23,6 @@ class LitecoinController < ApplicationController
   private
 
   def ethereum_params
-    params.require(:currency_price).permit(:exchange_id, :value, :datetime)
+    params.require(:currency_price).permit(:exchange_id, :ask_price, :bid_price, :datetime)
   end
 end
