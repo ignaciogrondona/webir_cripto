@@ -78,3 +78,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 3.5'
 gem 'haml'
 gem 'inline_svg'
+
+
+# For charts and graphics
+gem 'chartkick', '~> 3.0', '>= 3.0.1'

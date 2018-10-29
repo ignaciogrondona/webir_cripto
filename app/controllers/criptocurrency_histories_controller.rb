@@ -1,5 +1,6 @@
 class CriptocurrencyHistoriesController < InheritedResources::Base
 
+
   private
 
     def criptocurrency_history_params
