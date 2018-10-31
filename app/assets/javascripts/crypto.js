@@ -52,7 +52,6 @@ function refreshPrices(coin) {
   });
 }
 
-<<<<<<< HEAD
 function createCoin(coin, exchange, bid, ask, datetime) {
   var exchange_id;
   if (exchange == 'bitstamp') {
