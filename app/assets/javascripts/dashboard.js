@@ -44,7 +44,7 @@ function fetchValues(coin, exchange) {
       } else {
         value = data.data.amount;
       }
-      $('#' + exchange + '-' + coin + '-dashboard-price').html(value);
+      $('#' + exchange + '-' + coin + '-dashboard-price').html(Number(value).toFixed(2));
     },
     error: function() {
     }

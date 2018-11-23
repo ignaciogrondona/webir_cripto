@@ -34,7 +34,7 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      createCoin(coin, 'coinbase', data.bid, data.ask, new Date($.now()));
+      createCoin(coin, 'bitfinex', data.bid, data.ask, new Date($.now()));
     },
     error: function() {
     }
@@ -84,8 +84,8 @@ function createCoin(coin, exchange, bid, ask, datetime) {
     dataType: 'json',
     data: data,
     success: function(response) {
-      $('#' + exchange + '-' + coin + '-price-bid').html(response.bid_price);
-      $('#' + exchange + '-' + coin + '-price-ask').html(response.ask_price);
+      $('#' + exchange + '-' + coin + '-price-bid').html(response.bid_price.toFixed(2));
+      $('#' + exchange + '-' + coin + '-price-ask').html(response.ask_price.toFixed(2));
     },
     error: function() {
     }
