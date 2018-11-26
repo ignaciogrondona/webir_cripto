@@ -25,7 +25,7 @@ class RequestsServices
     end
     response = HTTParty.get("https://www.bitstamp.net/api/v2/ticker/#{symbol}")
     return unless response.success?
-    model.create(exchange_id: exchange.id, value: response['last'],
+    model.create(exchange_id: exchange.id, bid_price: response['bid'], ask_price: response['ask'],
       datetime: DateTime.strptime(response['timestamp'],'%s'))
   end
 
@@ -44,7 +44,7 @@ class RequestsServices
     end
     response = HTTParty.get("https://api.bitfinex.com/v1/pubticker/#{symbol}")
     return unless response.success?
-    model.create(exchange_id: exchange.id, value: response['last_price'],
+    model.create(exchange_id: exchange.id, bid_price: response['bid'], ask_price: response['ask'],
       datetime: DateTime.strptime(response['timestamp'],'%s'))
   end
 
@@ -61,9 +61,9 @@ class RequestsServices
       symbol = 'eth-usd'
       model = EthereumPrice
     end
-    response = HTTParty.get("https://api.coinbase.com/v2/prices/#{symbol}/spot")
+    response = HTTParty.get("https://api.pro.coinbase.com/products/#{symbol}/ticker")
     return unless response.success?
-    model.create(exchange_id: exchange.id, value: response['data']['amount'],
+    model.create(exchange_id: exchange.id, bid_price: response['bid'], ask_price: response['ask'],
       datetime: DateTime.now)
   end
 end

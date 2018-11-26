@@ -22,9 +22,7 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      createCoin(coin, 'bitstamp', data.last, new Date($.now()));
-      $('#bitstamp-' + coin + '-price-bid').html(data.bid);
-      $('#bitstamp-' + coin + '-price-ask').html(data.ask);
+      createCoin(coin, 'bitstamp', data.bid, data.ask, new Date($.now()));
     },
     error: function() {
     }
@@ -36,9 +34,7 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      createCoin(coin, 'coinbase', data.last_price, new Date($.now()));
-      $('#bitfinex-' + coin + '-price-bid').html(data.bid);
-      $('#bitfinex-' + coin + '-price-ask').html(data.ask);
+      createCoin(coin, 'bitfinex', data.bid, data.ask, new Date($.now()));
     },
     error: function() {
     }
@@ -49,16 +45,14 @@ function refreshPrices(coin) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      createCoin(coin, 'coinbase', data.data.amount, new Date($.now()));
-      $('#coinbase-'+ coin +'-price-bid').html(data.bid);
-      $('#coinbase-'+ coin +'-price-ask').html(data.ask);
+      createCoin(coin, 'coinbase', data.bid, data.ask, new Date($.now()));
     },
     error: function() {
     }
   });
 }
 
-function createCoin(coin, exchange, value, datetime) {
+function createCoin(coin, exchange, bid, ask, datetime) {
   var exchange_id;
   if (exchange == 'bitstamp') {
     exchange_id = 1;
@@ -78,7 +72,8 @@ function createCoin(coin, exchange, value, datetime) {
   var data = {
     currency_price: {
       exchange_id: exchange_id,
-      value: value,
+      bid_price: bid,
+      ask_price: ask,
       datetime: datetime
     }
   }
@@ -89,7 +84,8 @@ function createCoin(coin, exchange, value, datetime) {
     dataType: 'json',
     data: data,
     success: function(response) {
-      $('#' + exchange + '-' + coin + '-price').html(response.value);
+      $('#' + exchange + '-' + coin + '-price-bid').html(response.bid_price.toFixed(2));
+      $('#' + exchange + '-' + coin + '-price-ask').html(response.ask_price.toFixed(2));
     },
     error: function() {
     }
@@ -97,7 +93,6 @@ function createCoin(coin, exchange, value, datetime) {
 }
 
 function refreshAllPrices() {
-  refreshPrices('dashboard');
   refreshPrices('litecoin');
   refreshPrices('bitcoin');
   refreshPrices('ethereum');
@@ -107,13 +102,11 @@ $(document).on('turbolinks:load', function() {
   refreshAllPrices();
   setInterval(function() {
     refreshAllPrices();
-  }, 1000 * 60);
+  }, 1000 * 60 * 5);
 
-
-  $('#refresh-prices, #refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
+  $('#refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
     buttonId = $(this).attr('id');
     coin = buttonId.match(new RegExp('refresh-' + "(.*)" + '-prices'))[1];
     refreshPrices(coin);
   });
-
 });
