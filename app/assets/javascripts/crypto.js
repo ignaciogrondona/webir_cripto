@@ -101,7 +101,7 @@ $(document).on('turbolinks:load', function() {
   refreshAllPrices();
   setInterval(function() {
     refreshAllPrices();
-  }, 1000 * 60 * 5);
+  }, 1000 * 60 * 60);
 
   $('#refresh-litecoin-prices, #refresh-bitcoin-prices, #refresh-ethereum-prices').on('click', function() {
     buttonId = $(this).attr('id');
