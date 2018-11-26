@@ -4,7 +4,7 @@ ActiveAdmin.register CryptocurrencyPrice do
     id_column
     column :type
     column :exchange
-    column :avg_price
+    column :ask_price
     column :bid_price
     column :datetime
     actions

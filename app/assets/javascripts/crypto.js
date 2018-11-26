@@ -28,7 +28,6 @@ function refreshPrices(coin) {
     }
   });
 
-
   $.ajax({
     url: bitfinexUrl,
     type: 'GET',
