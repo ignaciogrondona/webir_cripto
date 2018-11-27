@@ -1,0 +1,11 @@
+%table.table.table-hover
+  %tr
+    %th Date
+    %th Bid Price
+    %th Ask Price
+
+  - bid_price.each_with_index do |bid, i|
+    %tr
+      %td=datetime[i].strftime('%H:%M:%S - %d/%m/%Y')
+      %td=bid
+      %td=ask_price[i]

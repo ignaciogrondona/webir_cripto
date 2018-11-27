@@ -10,7 +10,14 @@ class BitcoinController < ApplicationController
       end
       @prices.push(line_bid) unless line_bid[:data].empty?
       @prices.push(line_ask) unless line_ask[:data].empty?
+
+      @datetime = exchange.bitcoin_prices.last(20).pluck(:datetime).reverse
+      @bid_price = exchange.bitcoin_prices.last(20).pluck(:bid_price).reverse
+      @ask_price = exchange.bitcoin_prices.last(20).pluck(:bid_price).reverse
     end
+
+    @ask_price = @ask_price.last(20)
+
     @min = (@prices.map {|price| price[:data].values }.flatten.min * 0.998).truncate
     @max = (@prices.map {|price| price[:data].values }.flatten.max * 1.002).ceil
     @prices
