@@ -10,7 +10,12 @@ class EthereumController < ApplicationController
       end
       @prices.push(line_bid) unless line_bid[:data].empty?
       @prices.push(line_ask) unless line_ask[:data].empty?
+
+      @datetime = exchange.ethereum_prices.last(20).pluck(:datetime).reverse
+      @bid_price = exchange.ethereum_prices.last(20).pluck(:bid_price).reverse
+      @ask_price = exchange.ethereum_prices.last(20).pluck(:bid_price).reverse
     end
+
     @min = (@prices.map {|price| price[:data].values }.flatten.min * 0.998).truncate
     @max = (@prices.map {|price| price[:data].values }.flatten.max * 1.002).ceil
     @prices
